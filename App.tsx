@@ -1,16 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import {setupServer} from 'msw/node';
-import {http, HttpResponse} from 'msw';
-
-const server = setupServer(
-  http.get('/get', () => {
-    return HttpResponse.json({data: 'Hello'});
-  }),
-);
-
-server.listen();
 
 function App(): JSX.Element {
   React.useEffect(() => {
