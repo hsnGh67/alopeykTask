@@ -1,3 +1,5 @@
+import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+
 export enum OrderStatusEnum {
   'PENDING' = 'pending',
   'IN_PROCESS' = 'in-process',
@@ -26,3 +28,14 @@ export type ServerResponseType = {
   status: number;
   data: unknown;
 };
+
+export type PurcahseStackNavigatorParamList = {
+  Categoriy: undefined;
+  Products: undefined;
+};
+
+export type PurcahseNavigationProp = NativeStackScreenProps<
+  PurcahseStackNavigatorParamList,
+  Categoriy,
+  Products
+>;

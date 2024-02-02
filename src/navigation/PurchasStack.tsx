@@ -2,8 +2,9 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CategoryScreen from '@components/pages/Category/CategoryScreen';
 import ProductsScreen from '@components/pages/Products/ProductsScreen';
+import {PurcahseStackNavigatorParamList} from 'src/type';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<PurcahseStackNavigatorParamList>();
 
 export default function PurchasStack() {
   return (

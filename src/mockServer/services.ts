@@ -31,7 +31,7 @@ const populateCategories = () => {
     for (let i = 0; i < 5; i++) {
       products.push({
         name: faker.commerce.productName(),
-        id: faker.datatype.uuid(),
+        id: Math.floor(Math.random() * 1000000).toString(),
       });
     }
     categorizedProducts[cat] = products;
@@ -73,7 +73,10 @@ export const getOrders = (): Promise<ServerResponseType> => {
 export const addOrder = (newOrder: OrderType): Promise<ServerResponseType> => {
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
-      const order = {...newOrder, id: faker.datatype.uuid()};
+      const order = {
+        ...newOrder,
+        id: Math.floor(Math.random() * 1000000).toString(),
+      };
       orders.push(order);
       resolve({status: 200, data: order});
     }, 1000);
