@@ -2,10 +2,13 @@ import {faker} from '@faker-js/faker';
 import {
   CategorizedProducts,
   CategoryType,
+  OrderStatusEnum,
   OrderType,
   ProductType,
   ServerResponseType,
-} from 'src/type';
+} from 'src/type.d';
+
+const DELAY_TIME = 1000;
 
 const orders: OrderType[] = [];
 
@@ -44,17 +47,19 @@ export const getCategories = (): Promise<ServerResponseType> => {
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
       resolve({status: 200, data: categories});
-    }, 1000);
+    }, DELAY_TIME);
   });
 
   return promise;
 };
 
-export const getProductsOfTheCategory = (): Promise<ServerResponseType> => {
+export const getProductsOfTheCategory = (
+  cat: string,
+): Promise<ServerResponseType> => {
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
-      resolve({status: 200, data: categorizedProducts});
-    }, 1000);
+      resolve({status: 200, data: categorizedProducts[cat]});
+    }, DELAY_TIME);
   });
 
   return promise;
@@ -64,22 +69,26 @@ export const getOrders = (): Promise<ServerResponseType> => {
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
       resolve({status: 200, data: orders});
-    }, 1000);
+    }, DELAY_TIME);
   });
 
   return promise;
 };
 
-export const addOrder = (newOrder: OrderType): Promise<ServerResponseType> => {
+export const addOrder = (
+  newOrder: Omit<OrderType, 'id' | 'registerDate' | 'status'>,
+): Promise<ServerResponseType> => {
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
-      const order = {
+      const order: OrderType = {
         ...newOrder,
+        registerDate: Date.now(),
+        status: OrderStatusEnum.PENDING,
         id: Math.floor(Math.random() * 1000000).toString(),
       };
       orders.push(order);
       resolve({status: 200, data: order});
-    }, 1000);
+    }, DELAY_TIME);
   });
 
   return promise;

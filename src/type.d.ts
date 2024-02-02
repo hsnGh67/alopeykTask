@@ -16,11 +16,13 @@ export type ProductType = {
 
 export type CategorizedProducts = {[key: string]: ProductType[]};
 
+export type LocationType = [number, number];
+
 export type OrderType = {
   id: string;
   product: ProductType;
-  registerDate: Date;
-  location: [number, number];
+  registerDate: number;
+  location: LocationType;
   status: OrderStatusEnum;
 };
 
@@ -29,9 +31,14 @@ export type ServerResponseType = {
   data: unknown;
 };
 
+export type ScreenStateType<T> = {
+  data: T[];
+  isLoading: boolean;
+};
+
 export type PurcahseStackNavigatorParamList = {
   Categoriy: undefined;
-  Products: undefined;
+  Products: {category: string};
 };
 
 export type PurcahseNavigationProp = NativeStackScreenProps<

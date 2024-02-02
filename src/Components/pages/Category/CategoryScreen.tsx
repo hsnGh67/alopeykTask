@@ -1,19 +1,24 @@
-import {View, Text, ActivityIndicator, FlatList} from 'react-native';
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  FlatList,
+  StyleSheet,
+} from 'react-native';
 import React from 'react';
-import {CategoryType, PurcahseNavigationProp} from '../../../type';
+import {
+  CategoryType,
+  PurcahseNavigationProp,
+  ScreenStateType,
+} from '../../../type';
 import CategoryRow from './CategoryRow';
 import {useServerContext} from '../../../mockServer/ServerContext';
 import {moderateScale} from 'react-native-size-matters';
 import {useNavigation} from '@react-navigation/native';
 
-type StateType = {
-  data: CategoryType[];
-  isLoading: boolean;
-};
-
 export default function CategoryScreen() {
   const {getCategories} = useServerContext();
-  const [state, setState] = React.useState<StateType>({
+  const [state, setState] = React.useState<ScreenStateType<CategoryType>>({
     data: [],
     isLoading: true,
   });
@@ -41,9 +46,11 @@ export default function CategoryScreen() {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       {state.isLoading ? (
-        <ActivityIndicator />
+        <View style={styles.wrapper}>
+          <ActivityIndicator size={'large'} />
+        </View>
       ) : (
         <FlatList
           data={state.data}
@@ -51,6 +58,7 @@ export default function CategoryScreen() {
           keyExtractor={(cat, index) => cat}
           renderItem={({item}) => (
             <CategoryRow
+              key={item}
               category={item}
               onRowPressed={() => onRowPressed(item)}
             />
@@ -60,3 +68,14 @@ export default function CategoryScreen() {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  wrapper: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
