@@ -1,3 +1,4 @@
+import {ServerContextProvider} from './src/mockServer/ServerContext';
 import MainNavigator from '@navigation/MainNavigator';
 import React from 'react';
 import {View} from 'react-native';
@@ -9,7 +10,9 @@ function App(): JSX.Element {
         width: '100%',
         height: '100%',
       }}>
-      <MainNavigator />
+      <ServerContextProvider>
+        <MainNavigator />
+      </ServerContextProvider>
     </View>
   );
 }
