@@ -6,7 +6,8 @@ const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
   return (
-    <Tab.Navigator screenOptions={{headerShown: false}}>
+    <Tab.Navigator
+      screenOptions={{headerShown: false, tabBarIconStyle: {display: 'none'}}}>
       <Tab.Screen name="PurchaseTab" component={PurchasStack} />
       <Tab.Screen
         name="HistoryTab"
