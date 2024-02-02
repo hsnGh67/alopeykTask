@@ -1,4 +1,5 @@
 import type {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {NavigatorScreenParams} from '@react-navigation/native';
 
 export enum OrderStatusEnum {
   'PENDING' = 'pending',
@@ -37,12 +38,17 @@ export type ScreenStateType<T> = {
 };
 
 export type PurcahseStackNavigatorParamList = {
-  Categoriy: undefined;
+  Category: undefined;
   Products: {category: string};
 };
 
 export type PurcahseNavigationProp = NativeStackScreenProps<
   PurcahseStackNavigatorParamList,
-  Categoriy,
+  Category,
   Products
 >;
+
+export type TabParamList = {
+  PurchaseTab: NavigatorScreenParams<PurcahseStackNavigatorParamList>;
+  HistoryTab: undefined;
+};

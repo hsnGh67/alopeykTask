@@ -9,7 +9,7 @@ const Stack = createNativeStackNavigator<PurcahseStackNavigatorParamList>();
 export default function PurchasStack() {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Categoriy" component={CategoryScreen} />
+      <Stack.Screen name="Category" component={CategoryScreen} />
       <Stack.Screen name="Products" component={ProductsScreen} />
     </Stack.Navigator>
   );

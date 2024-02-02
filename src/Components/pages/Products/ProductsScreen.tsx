@@ -1,25 +1,29 @@
 import {View, StyleSheet, ActivityIndicator, FlatList} from 'react-native';
 import React from 'react';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {
   LocationType,
   ProductType,
-  PurcahseNavigationProp,
   PurcahseStackNavigatorParamList,
   ScreenStateType,
+  TabParamList,
 } from 'src/type';
 import {useServerContext} from '../../../mockServer/ServerContext';
-import {useNavigation} from '@react-navigation/native';
 import {moderateScale} from 'react-native-size-matters';
 import ProductRow from './ProductRow';
 import Map from './Map';
+import type {CompositeScreenProps} from '@react-navigation/native';
+import type {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-type PropsType = NativeStackScreenProps<
-  PurcahseStackNavigatorParamList,
-  'Products'
+type ProductScreenProps = CompositeScreenProps<
+  NativeStackScreenProps<PurcahseStackNavigatorParamList, 'Products'>,
+  BottomTabScreenProps<TabParamList>
 >;
 
-export default function ProductsScreen({route}: PropsType) {
+export default function ProductsScreen({
+  navigation,
+  route,
+}: ProductScreenProps) {
   const {category} = route.params;
   const {getProductsOfTheCategory, addOrder} = useServerContext();
   const [showMap, setShowMap] = React.useState(false);
@@ -33,7 +37,6 @@ export default function ProductsScreen({route}: PropsType) {
     data: [],
     isLoading: true,
   });
-  const navigation = useNavigation<PurcahseNavigationProp>();
 
   React.useEffect(() => {
     getProducts();

@@ -1,8 +1,9 @@
 import HistoryScreen from '@components/pages/History/HistoryScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import PurchasStack from './PurchasStack';
+import {TabParamList} from 'src/type';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   return (

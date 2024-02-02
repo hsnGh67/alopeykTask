@@ -10,20 +10,19 @@ import React from 'react';
 import {
   CategoryType,
   PurcahseNavigationProp,
+  PurcahseStackNavigatorParamList,
   ScreenStateType,
 } from '../../../type';
 import CategoryRow from './CategoryRow';
 import {useServerContext} from '../../../mockServer/ServerContext';
 import {moderateScale} from 'react-native-size-matters';
-import {useNavigation} from '@react-navigation/native';
 
-export default function CategoryScreen() {
+export default function CategoryScreen({navigation}: PurcahseNavigationProp) {
   const {getCategories} = useServerContext();
   const [state, setState] = React.useState<ScreenStateType<CategoryType>>({
     data: [],
     isLoading: true,
   });
-  const navigation = useNavigation<PurcahseNavigationProp>();
 
   React.useEffect(() => {
     getCats();
