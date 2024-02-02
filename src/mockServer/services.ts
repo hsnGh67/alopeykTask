@@ -8,7 +8,8 @@ import {
   ServerResponseType,
 } from 'src/type.d';
 
-const DELAY_TIME = 1000;
+const DELAY_TIME = 500;
+const STATE_INTERVAL = 30000;
 
 const orders: OrderType[] = [];
 
@@ -66,9 +67,22 @@ export const getProductsOfTheCategory = (
 };
 
 export const getOrders = (): Promise<ServerResponseType> => {
+  const nowTime = Date.now();
+  const newOrder = orders.map(order => {
+    const diff = Math.floor((nowTime - order.registerDate) / STATE_INTERVAL);
+    if (diff === 0) {
+      return {...order, status: OrderStatusEnum.PENDING};
+    } else if (diff === 1) {
+      return {...order, status: OrderStatusEnum.IN_PROCESS};
+    } else if (diff === 2) {
+      return {...order, status: OrderStatusEnum.DELIVERY};
+    } else if (diff > 2) {
+      return {...order, status: OrderStatusEnum.DELIVERED};
+    }
+  });
   const promise: Promise<ServerResponseType> = new Promise(resolve => {
     setTimeout(() => {
-      resolve({status: 200, data: orders});
+      resolve({status: 200, data: [...newOrder]});
     }, DELAY_TIME);
   });
 

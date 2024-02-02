@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Modal} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {
   LatLng,
   LeafletView,
@@ -22,7 +22,7 @@ const DEFAULT_COORDINATE: LatLng = {
   lng: 51.3347,
 };
 
-export default function Map({
+function Map({
   show,
   onRequestClose,
   location,
@@ -86,3 +86,5 @@ const styles = StyleSheet.create({
     height: moderateScale(50),
   },
 });
+
+export default memo(Map);

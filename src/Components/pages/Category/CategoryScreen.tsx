@@ -4,6 +4,7 @@ import {
   ActivityIndicator,
   FlatList,
   StyleSheet,
+  ToastAndroid,
 } from 'react-native';
 import React from 'react';
 import {
@@ -36,8 +37,16 @@ export default function CategoryScreen() {
           isLoading: false,
           data: res.data as CategoryType[],
         });
+      } else {
+        throw new Error('some error has happened');
       }
-    } catch (e) {}
+    } catch (e) {
+      ToastAndroid.show('something went wrong', ToastAndroid.LONG);
+      setState({
+        ...state,
+        isLoading: false,
+      });
+    }
   };
 
   const onRowPressed = React.useCallback((cat: string) => {

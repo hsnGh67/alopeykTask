@@ -1,15 +1,17 @@
-import {TouchableOpacity, Text, StyleSheet} from 'react-native';
+import {TouchableOpacity, Text, StyleSheet, ViewStyle} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 type PropsType = {
   children: React.ReactNode;
   disabled?: boolean;
   onPress: () => void;
+  style?: ViewStyle;
 };
 export default function Button({
   children,
   disabled = false,
   onPress,
+  style = {},
 }: PropsType) {
   const onBtnPressed = () => {
     if (disabled) return;
@@ -19,8 +21,10 @@ export default function Button({
     <TouchableOpacity
       style={{
         ...styles.container,
+        ...style,
         backgroundColor: disabled ? '#B4BFC8' : '#0099FF',
       }}
+      activeOpacity={0.9}
       onPress={onBtnPressed}>
       <Text style={{...styles.txt, color: disabled ? '#5a5a5a' : '#fff'}}>
         {children}

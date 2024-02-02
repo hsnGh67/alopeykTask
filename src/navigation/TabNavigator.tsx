@@ -8,7 +8,11 @@ export default function TabNavigator() {
   return (
     <Tab.Navigator screenOptions={{headerShown: false}}>
       <Tab.Screen name="PurchaseTab" component={PurchasStack} />
-      <Tab.Screen name="HistoryTab" component={HistoryScreen} />
+      <Tab.Screen
+        name="HistoryTab"
+        component={HistoryScreen}
+        options={{unmountOnBlur: true}}
+      />
     </Tab.Navigator>
   );
 }
