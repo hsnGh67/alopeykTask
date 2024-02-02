@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {moderateScale} from 'react-native-size-matters';
 import ITypography from '@components/common/Typography';
 import {useNavigation} from '@react-navigation/native';
@@ -8,7 +8,7 @@ type PropsType = {
   category: string;
   onRowPressed: () => void;
 };
-export default function CategoryRow({category, onRowPressed}: PropsType) {
+function CategoryRow({category, onRowPressed}: PropsType) {
   return (
     <TouchableOpacity
       style={styles.container}
@@ -34,3 +34,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+export default memo(CategoryRow);
