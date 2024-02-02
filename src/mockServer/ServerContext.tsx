@@ -14,9 +14,11 @@ import {
 
 type MockServerContextType = {
   getCategories: () => Promise<ServerResponseType>;
-  getProductsOfTheCategory: () => Promise<ServerResponseType>;
+  getProductsOfTheCategory: (category: string) => Promise<ServerResponseType>;
   getOrders: () => Promise<ServerResponseType>;
-  addOrder: (newOrder: OrderType) => Promise<ServerResponseType>;
+  addOrder: (
+    newOrder: Omit<OrderType, 'id' | 'registerDate' | 'status'>,
+  ) => Promise<ServerResponseType>;
 };
 
 const MockServerContext = React.createContext<MockServerContextType>({
